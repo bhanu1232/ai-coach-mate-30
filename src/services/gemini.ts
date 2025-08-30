@@ -15,6 +15,8 @@ interface FeedbackResponse {
   overall_score: number;
   strengths: string[];
   areas_for_improvement: string[];
+  grammar_mistakes: string[];
+  suggested_answer?: string;
 }
 
 const GEMINI_API_KEY = 'AIzaSyBwHG1OPwiL4hG6J_zs5SPXpldiOvPCr-E';
@@ -188,20 +190,24 @@ Provide comprehensive feedback evaluating:
 1. CLARITY (1-10): How well-structured and understandable is the answer?
 2. TONE: Does the candidate sound confident, weak, or neutral?
 3. KEYWORDS MISSED: Important terms from the job description not mentioned in the answer
-4. SPECIFIC SUGGESTIONS: Actionable advice to improve the answer
-5. OVERALL SCORE (1-100): Holistic assessment of the answer quality
-6. STRENGTHS: What the candidate did well
-7. AREAS FOR IMPROVEMENT: Specific areas that need work
+4. GRAMMAR MISTAKES: Any grammatical errors, typos, or language issues in the answer
+5. SPECIFIC SUGGESTIONS: Actionable advice to improve the answer
+6. OVERALL SCORE (1-100): Holistic assessment of the answer quality
+7. STRENGTHS: What the candidate did well
+8. AREAS FOR IMPROVEMENT: Specific areas that need work
+9. SUGGESTED ANSWER: If score is below 70, provide a better version of the answer (optional)
 
 Respond ONLY with valid JSON in this exact format:
 {
   "clarity": 8,
   "tone": "confident",
   "keywords_missed": ["specific keyword1", "specific keyword2"],
+  "grammar_mistakes": ["Grammar issue 1", "Grammar issue 2"],
   "suggestions": ["Specific suggestion 1", "Specific suggestion 2"],
   "overall_score": 75,
   "strengths": ["Strength 1", "Strength 2"],
-  "areas_for_improvement": ["Area 1", "Area 2"]
+  "areas_for_improvement": ["Area 1", "Area 2"],
+  "suggested_answer": "A better version of the answer (only if overall_score < 70)"
 }
 
 Be constructive, specific, and helpful in your feedback. Focus on actionable improvements.
@@ -223,10 +229,12 @@ Be constructive, specific, and helpful in your feedback. Focus on actionable imp
         clarity: Math.max(1, Math.min(10, parsedResponse.clarity || 5)),
         tone: ['confident', 'weak', 'neutral'].includes(parsedResponse.tone) ? parsedResponse.tone : 'neutral',
         keywords_missed: Array.isArray(parsedResponse.keywords_missed) ? parsedResponse.keywords_missed : [],
+        grammar_mistakes: Array.isArray(parsedResponse.grammar_mistakes) ? parsedResponse.grammar_mistakes : [],
         suggestions: Array.isArray(parsedResponse.suggestions) ? parsedResponse.suggestions : ['Consider providing more specific examples'],
         overall_score: Math.max(1, Math.min(100, parsedResponse.overall_score || 50)),
         strengths: Array.isArray(parsedResponse.strengths) ? parsedResponse.strengths : ['Provided a complete answer'],
-        areas_for_improvement: Array.isArray(parsedResponse.areas_for_improvement) ? parsedResponse.areas_for_improvement : ['Add more specific details']
+        areas_for_improvement: Array.isArray(parsedResponse.areas_for_improvement) ? parsedResponse.areas_for_improvement : ['Add more specific details'],
+        suggested_answer: parsedResponse.suggested_answer || undefined
       };
     } catch (error) {
       console.error('Error getting feedback:', error);
@@ -236,10 +244,12 @@ Be constructive, specific, and helpful in your feedback. Focus on actionable imp
         clarity: 6,
         tone: 'neutral',
         keywords_missed: ['Unable to analyze - please try again'],
+        grammar_mistakes: [],
         suggestions: ['Try to be more specific with examples', 'Structure your answer with clear beginning, middle, and end'],
         overall_score: 60,
         strengths: ['Provided a response to the question'],
-        areas_for_improvement: ['Add more specific examples', 'Consider using the STAR method for behavioral questions']
+        areas_for_improvement: ['Add more specific examples', 'Consider using the STAR method for behavioral questions'],
+        suggested_answer: undefined
       };
     }
   }

@@ -231,6 +231,47 @@ const FeedbackDisplay = ({
         </Card>
       )}
 
+      {/* Grammar Mistakes */}
+      {feedback.grammar_mistakes && feedback.grammar_mistakes.length > 0 && (
+        <Card className="p-6 glass">
+          <div className="flex items-center gap-3 mb-4">
+            <div className="w-8 h-8 bg-warning/20 rounded-lg flex items-center justify-center">
+              <AlertCircle className="w-4 h-4 text-warning" />
+            </div>
+            <h4 className="text-lg font-semibold">Grammar & Language Issues</h4>
+          </div>
+          
+          <ul className="space-y-2">
+            {feedback.grammar_mistakes.map((mistake, index) => (
+              <li key={index} className="flex items-start gap-3">
+                <div className="w-2 h-2 bg-warning rounded-full mt-2 flex-shrink-0" />
+                <span className="text-muted-foreground">{mistake}</span>
+              </li>
+            ))}
+          </ul>
+        </Card>
+      )}
+
+      {/* Suggested Better Answer */}
+      {feedback.suggested_answer && (
+        <Card className="p-6 glass border-primary/20">
+          <div className="flex items-center gap-3 mb-4">
+            <div className="w-8 h-8 bg-primary/20 rounded-lg flex items-center justify-center">
+              <Lightbulb className="w-4 h-4 text-primary" />
+            </div>
+            <h4 className="text-lg font-semibold text-primary">Suggested Improved Answer</h4>
+          </div>
+          
+          <p className="text-sm text-muted-foreground mb-3">
+            Here's how you could enhance your response:
+          </p>
+          
+          <div className="bg-primary/5 p-4 rounded-lg border border-primary/20">
+            <p className="text-foreground">{feedback.suggested_answer}</p>
+          </div>
+        </Card>
+      )}
+
       {/* Question and Answer Review */}
       <Card className="p-6 glass">
         <h4 className="text-lg font-semibold mb-4">Question & Answer Review</h4>
