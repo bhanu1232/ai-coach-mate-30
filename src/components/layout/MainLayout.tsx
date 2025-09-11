@@ -1,8 +1,13 @@
+import { ReactNode } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
 import { Navigate } from 'react-router-dom';
-import Hero from '@/components/Hero';
+import Sidebar from './Sidebar';
 
-const Index = () => {
+interface MainLayoutProps {
+  children: ReactNode;
+}
+
+const MainLayout = ({ children }: MainLayoutProps) => {
   const { user, loading } = useAuth();
 
   if (loading) {
@@ -16,18 +21,18 @@ const Index = () => {
     );
   }
 
-  if (user) {
-    return <Navigate to="/dashboard" replace />;
+  if (!user) {
+    return <Navigate to="/login" replace />;
   }
 
   return (
-    <div className="min-h-screen bg-background">
-      <Hero 
-        onStartPracticing={() => window.location.href = '/login'}
-        onUploadJobDescription={() => window.location.href = '/login'}
-      />
+    <div className="min-h-screen bg-background flex">
+      <Sidebar />
+      <main className="flex-1 overflow-auto">
+        {children}
+      </main>
     </div>
   );
 };
 
-export default Index;
+export default MainLayout;
