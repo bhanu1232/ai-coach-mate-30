@@ -11,7 +11,8 @@ import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, D
 import MainLayout from '@/components/layout/MainLayout';
 import JobCard from '@/components/JobCard';
 import ProgressTracker from '@/components/ProgressTracker';
-import { Plus, Sparkles, Target, TrendingUp } from 'lucide-react';
+import Hero from '@/components/Hero';
+import { Plus, Sparkles, Target, TrendingUp, Brain, Mic, Code, Award } from 'lucide-react';
 
 const Home = () => {
   const { user } = useAuth();
@@ -76,25 +77,65 @@ const Home = () => {
     }
   };
 
+  // Show Hero component for new users, dashboard for existing users
+  if (jobs.length === 0 && userProgress.totalSessions === 0) {
+    return <Hero />;
+  }
+
   return (
     <MainLayout>
       <div className="p-6 space-y-8">
         {/* Welcome Header */}
-        <div className="bg-gradient-to-r from-primary/10 via-primary/5 to-accent/10 rounded-2xl p-8 border">
-          <div className="space-y-4">
-            <div>
-              <h1 className="text-3xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+        <div className="bg-gradient-card rounded-2xl p-8 border border-primary/20 shadow-card">
+          <div className="space-y-6">
+            <div className="text-center space-y-4">
+              <h1 className="text-4xl font-bold bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">
                 {getGreeting()}, {user?.displayName?.split(' ')[0] || 'there'}!
               </h1>
-              <p className="text-lg text-muted-foreground">
-                Ready to ace your next interview? Let's practice together.
+              <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+                Welcome to your AI-powered interview preparation dashboard. Track your progress and master your next interview.
               </p>
+            </div>
+
+            {/* Feature Highlights */}
+            <div className="grid md:grid-cols-4 gap-6">
+              <div className="text-center space-y-2 p-4 bg-background/50 rounded-xl border border-primary/10">
+                <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto">
+                  <Brain className="w-6 h-6 text-primary" />
+                </div>
+                <h3 className="font-semibold">AI Questions</h3>
+                <p className="text-sm text-muted-foreground">Personalized for each job</p>
+              </div>
+              
+              <div className="text-center space-y-2 p-4 bg-background/50 rounded-xl border border-accent/10">
+                <div className="w-12 h-12 bg-accent/10 rounded-full flex items-center justify-center mx-auto">
+                  <Mic className="w-6 h-6 text-accent" />
+                </div>
+                <h3 className="font-semibold">Mock Interviews</h3>
+                <p className="text-sm text-muted-foreground">Realistic practice sessions</p>
+              </div>
+              
+              <div className="text-center space-y-2 p-4 bg-background/50 rounded-xl border border-success/10">
+                <div className="w-12 h-12 bg-success/10 rounded-full flex items-center justify-center mx-auto">
+                  <Code className="w-6 h-6 text-success" />
+                </div>
+                <h3 className="font-semibold">Coding Practice</h3>
+                <p className="text-sm text-muted-foreground">Built-in IDE with tests</p>
+              </div>
+              
+              <div className="text-center space-y-2 p-4 bg-background/50 rounded-xl border border-warning/10">
+                <div className="w-12 h-12 bg-warning/10 rounded-full flex items-center justify-center mx-auto">
+                  <Award className="w-6 h-6 text-warning" />
+                </div>
+                <h3 className="font-semibold">Progress Tracking</h3>
+                <p className="text-sm text-muted-foreground">Detailed analytics</p>
+              </div>
             </div>
 
             {/* Quick Stats */}
             {userProgress.totalSessions > 0 && (
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div className="flex items-center gap-3 p-4 bg-background/50 rounded-lg border">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-4">
+                <div className="flex items-center gap-3 p-4 bg-background/50 rounded-lg border border-primary/10">
                   <Target className="h-8 w-8 text-primary" />
                   <div>
                     <p className="text-2xl font-bold">{userProgress.totalSessions}</p>
@@ -102,7 +143,7 @@ const Home = () => {
                   </div>
                 </div>
                 
-                <div className="flex items-center gap-3 p-4 bg-background/50 rounded-lg border">
+                <div className="flex items-center gap-3 p-4 bg-background/50 rounded-lg border border-accent/10">
                   <TrendingUp className="h-8 w-8 text-accent" />
                   <div>
                     <p className="text-2xl font-bold">{userProgress.averageScore}%</p>
@@ -110,8 +151,8 @@ const Home = () => {
                   </div>
                 </div>
                 
-                <div className="flex items-center gap-3 p-4 bg-background/50 rounded-lg border">
-                  <Sparkles className="h-8 w-8 text-secondary" />
+                <div className="flex items-center gap-3 p-4 bg-background/50 rounded-lg border border-success/10">
+                  <Sparkles className="h-8 w-8 text-success" />
                   <div>
                     <p className="text-2xl font-bold">{userProgress.completedSessions}</p>
                     <p className="text-sm text-muted-foreground">Completed</p>
@@ -141,57 +182,91 @@ const Home = () => {
                   Add New Job
                 </Button>
               </DialogTrigger>
-              <DialogContent className="sm:max-w-[600px]">
-                <DialogHeader>
-                  <DialogTitle>Add New Job Position</DialogTitle>
-                  <DialogDescription>
-                    Create a new job preparation session. We'll generate personalized interview questions based on the job description.
+              <DialogContent className="sm:max-w-[700px]">
+                <DialogHeader className="text-center space-y-4">
+                  <div className="w-16 h-16 bg-gradient-primary rounded-2xl flex items-center justify-center mx-auto">
+                    <Plus className="w-8 h-8 text-primary-foreground" />
+                  </div>
+                  <DialogTitle className="text-2xl">Add New Job Position</DialogTitle>
+                  <DialogDescription className="text-base">
+                    Create a new job preparation session. Our AI will analyze the job description and generate personalized interview questions, coding challenges, and practice scenarios.
                   </DialogDescription>
                 </DialogHeader>
                 
-                <div className="space-y-4">
+                <div className="space-y-6">
                   <div className="grid grid-cols-2 gap-4">
-                    <div className="space-y-2">
-                      <Label htmlFor="title">Job Title *</Label>
+                    <div className="space-y-3">
+                      <Label htmlFor="title" className="text-base font-semibold">Job Title *</Label>
                       <Input
                         id="title"
                         placeholder="e.g. Senior Software Engineer"
                         value={newJob.title}
                         onChange={(e) => setNewJob({ ...newJob, title: e.target.value })}
+                        className="h-12 text-base"
                       />
                     </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="company">Company *</Label>
+                    <div className="space-y-3">
+                      <Label htmlFor="company" className="text-base font-semibold">Company *</Label>
                       <Input
                         id="company"
                         placeholder="e.g. Google, Microsoft"
                         value={newJob.company}
                         onChange={(e) => setNewJob({ ...newJob, company: e.target.value })}
+                        className="h-12 text-base"
                       />
                     </div>
                   </div>
                   
-                  <div className="space-y-2">
-                    <Label htmlFor="description">Job Description *</Label>
+                  <div className="space-y-3">
+                    <Label htmlFor="description" className="text-base font-semibold">Job Description *</Label>
                     <Textarea
                       id="description"
-                      placeholder="Paste the complete job description here. Include responsibilities, requirements, and any specific skills mentioned."
-                      className="min-h-[200px]"
+                      placeholder="Paste the complete job description here. Include responsibilities, requirements, qualifications, and any specific skills or technologies mentioned. The more detailed the description, the better our AI can tailor the interview experience."
+                      className="min-h-[240px] text-base leading-relaxed resize-none"
                       value={newJob.description}
                       onChange={(e) => setNewJob({ ...newJob, description: e.target.value })}
                     />
-                    <p className="text-xs text-muted-foreground">
-                      The more detailed the job description, the better we can tailor the interview questions.
-                    </p>
+                    <div className="flex items-center justify-between text-sm">
+                      <p className="text-muted-foreground">
+                        💡 Pro tip: Include tech stack, experience level, and key responsibilities for best results
+                      </p>
+                      <span className="text-muted-foreground">
+                        {newJob.description.length} characters
+                      </span>
+                    </div>
                   </div>
+                  
+                  {newJob.description.length > 100 && (
+                    <div className="bg-primary/5 border border-primary/20 rounded-lg p-4">
+                      <h4 className="font-semibold text-primary mb-2">✨ What you'll get:</h4>
+                      <ul className="space-y-1 text-sm text-muted-foreground">
+                        <li>• Personalized behavioral interview questions</li>
+                        <li>• Technical questions based on job requirements</li>
+                        <li>• Coding challenges in relevant languages</li>
+                        <li>• Mock interview practice with AI feedback</li>
+                        <li>• Performance analytics and improvement suggestions</li>
+                      </ul>
+                    </div>
+                  )}
                 </div>
 
-                <DialogFooter>
-                  <Button variant="outline" onClick={() => setIsCreateDialogOpen(false)}>
+                <DialogFooter className="gap-2">
+                  <Button variant="outline" onClick={() => setIsCreateDialogOpen(false)} className="px-6">
                     Cancel
                   </Button>
-                  <Button onClick={handleCreateJob} disabled={isLoading}>
-                    {isLoading ? "Creating..." : "Create Job"}
+                  <Button 
+                    onClick={handleCreateJob} 
+                    disabled={isLoading || !newJob.title.trim() || !newJob.company.trim() || !newJob.description.trim()}
+                    className="bg-gradient-primary hover:shadow-glow transition-all duration-300 px-8"
+                  >
+                    {isLoading ? (
+                      <div className="flex items-center gap-2">
+                        <div className="w-4 h-4 border-2 border-primary-foreground/30 border-t-primary-foreground rounded-full animate-spin"></div>
+                        Generating Questions...
+                      </div>
+                    ) : (
+                      "🚀 Create Job Preparation"
+                    )}
                   </Button>
                 </DialogFooter>
               </DialogContent>
@@ -199,18 +274,21 @@ const Home = () => {
           </div>
 
           {jobs.length === 0 ? (
-            <Card className="border-dashed border-2">
-              <CardContent className="flex flex-col items-center justify-center py-12 text-center">
-                <div className="p-4 rounded-full bg-primary/10 mb-4">
-                  <Plus className="h-8 w-8 text-primary" />
+            <Card className="border-dashed border-2 border-primary/20 bg-gradient-card">
+              <CardContent className="flex flex-col items-center justify-center py-16 text-center">
+                <div className="w-20 h-20 bg-gradient-primary rounded-2xl flex items-center justify-center mb-6 shadow-glow">
+                  <Plus className="h-10 w-10 text-primary-foreground" />
                 </div>
-                <CardTitle className="mb-2">No Job Preparations Yet</CardTitle>
-                <CardDescription className="mb-6 max-w-md">
-                  Get started by adding your first job description. We'll create personalized interview questions to help you prepare.
+                <CardTitle className="mb-4 text-2xl">Ready to Start Your Interview Journey?</CardTitle>
+                <CardDescription className="mb-8 max-w-lg text-lg leading-relaxed">
+                  Add your first job description and let our AI create personalized interview questions tailored specifically for that role.
                 </CardDescription>
-                <Button onClick={() => setIsCreateDialogOpen(true)} className="gap-2">
-                  <Plus className="h-4 w-4" />
-                  Add Your First Job
+                <Button 
+                  onClick={() => setIsCreateDialogOpen(true)} 
+                  className="gap-2 bg-gradient-primary hover:shadow-glow transition-all duration-300 px-8 py-6 text-lg rounded-2xl"
+                >
+                  <Plus className="h-5 h-5" />
+                  Create Your First Job Preparation
                 </Button>
               </CardContent>
             </Card>
