@@ -28,8 +28,10 @@ const MainLayout = ({ children }: MainLayoutProps) => {
   return (
     <div className="min-h-screen bg-background flex">
       <Sidebar />
-      <main className="flex-1 overflow-auto">
-        {children}
+      <main className="flex-1 overflow-hidden">
+        <div className="h-screen overflow-y-auto">
+          {children}
+        </div>
       </main>
     </div>
   );

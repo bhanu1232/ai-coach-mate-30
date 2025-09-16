@@ -173,19 +173,19 @@ const InterviewAnalysis = ({ analysisData, jobTitle, onRetake, onSaveReport }: I
             </div>
 
             {/* Actions */}
-            <div class="space-y-4">
-              <div class="flex gap-2">
-                <Button onClick={onRetake} variant="outline" class="flex-1">
-                  <Clock class="w-4 h-4 mr-2" />
+            <div className="space-y-4">
+              <div className="flex gap-2">
+                <Button onClick={onRetake} variant="outline" className="flex-1">
+                  <Clock className="w-4 h-4 mr-2" />
                   Retake Interview
                 </Button>
-                <Button onClick={onSaveReport} class="flex-1 bg-gradient-primary hover:shadow-glow">
-                  <Download class="w-4 h-4 mr-2" />
+                <Button onClick={onSaveReport} className="flex-1 bg-gradient-primary hover:shadow-glow">
+                  <Download className="w-4 h-4 mr-2" />
                   Save Report
                 </Button>
               </div>
-              <Button variant="outline" class="w-full">
-                <Share class="w-4 h-4 mr-2" />
+              <Button variant="outline" className="w-full">
+                <Share className="w-4 h-4 mr-2" />
                 Share Results
               </Button>
             </div>
@@ -194,119 +194,119 @@ const InterviewAnalysis = ({ analysisData, jobTitle, onRetake, onSaveReport }: I
       </Card>
 
       {/* Detailed Analysis */}
-      <Tabs defaultValue="performance" class="space-y-6">
-        <TabsList class="grid w-full grid-cols-5">
+      <Tabs defaultValue="performance" className="space-y-6">
+        <TabsList className="grid w-full grid-cols-5">
           <TabsTrigger value="performance">
-            <BarChart3 class="w-4 h-4 mr-2" />
+            <BarChart3 className="w-4 h-4 mr-2" />
             Performance
           </TabsTrigger>
           <TabsTrigger value="questions">
-            <MessageSquare class="w-4 h-4 mr-2" />
+            <MessageSquare className="w-4 h-4 mr-2" />
             Questions
           </TabsTrigger>
           <TabsTrigger value="transcript">
-            <FileText class="w-4 h-4 mr-2" />
+            <FileText className="w-4 h-4 mr-2" />
             Transcript
           </TabsTrigger>
           <TabsTrigger value="feedback">
-            <Lightbulb class="w-4 h-4 mr-2" />
+            <Lightbulb className="w-4 h-4 mr-2" />
             Feedback
           </TabsTrigger>
           <TabsTrigger value="recommendations">
-            <Star class="w-4 h-4 mr-2" />
+            <Star className="w-4 h-4 mr-2" />
             Recommendations
           </TabsTrigger>
         </TabsList>
 
-        <TabsContent value="performance" class="space-y-6">
+        <TabsContent value="performance" className="space-y-6">
           {/* Performance Metrics */}
-          <div class="grid md:grid-cols-2 gap-6">
+          <div className="grid md:grid-cols-2 gap-6">
             <Card>
               <CardHeader>
-                <CardTitle class="flex items-center gap-2">
-                  <Volume2 class="w-5 h-5 text-primary" />
+                <CardTitle className="flex items-center gap-2">
+                  <Volume2 className="w-5 h-5 text-primary" />
                   Communication Metrics
                 </CardTitle>
               </CardHeader>
-              <CardContent class="space-y-4">
-                <div class="space-y-2">
-                  <div class="flex justify-between">
-                    <span class="text-sm">Speech Pace</span>
-                    <span class="text-sm font-medium">{analysisData.metrics.speechPace} WPM</span>
+              <CardContent className="space-y-4">
+                <div className="space-y-2">
+                  <div className="flex justify-between">
+                    <span className="text-sm">Speech Pace</span>
+                    <span className="text-sm font-medium">{analysisData.metrics.speechPace} WPM</span>
                   </div>
-                  <Progress value={(analysisData.metrics.speechPace / 200) * 100} class="h-2" />
-                  <p class="text-xs text-muted-foreground">Optimal range: 140-180 WPM</p>
+                  <Progress value={(analysisData.metrics.speechPace / 200) * 100} className="h-2" />
+                  <p className="text-xs text-muted-foreground">Optimal range: 140-180 WPM</p>
                 </div>
 
-                <div class="space-y-2">
-                  <div class="flex justify-between">
-                    <span class="text-sm">Clarity</span>
-                    <span class="text-sm font-medium">{analysisData.metrics.clarity}%</span>
+                <div className="space-y-2">
+                  <div className="flex justify-between">
+                    <span className="text-sm">Clarity</span>
+                    <span className="text-sm font-medium">{analysisData.metrics.clarity}%</span>
                   </div>
-                  <Progress value={analysisData.metrics.clarity} class="h-2" />
+                  <Progress value={analysisData.metrics.clarity} className="h-2" />
                 </div>
 
-                <div class="space-y-2">
-                  <div class="flex justify-between">
-                    <span class="text-sm">Filler Words</span>
-                    <span class="text-sm font-medium">{analysisData.metrics.fillerWords}</span>
+                <div className="space-y-2">
+                  <div className="flex justify-between">
+                    <span className="text-sm">Filler Words</span>
+                    <span className="text-sm font-medium">{analysisData.metrics.fillerWords}</span>
                   </div>
-                  <Progress value={Math.max(0, 100 - analysisData.metrics.fillerWords * 10)} class="h-2" />
+                  <Progress value={Math.max(0, 100 - analysisData.metrics.fillerWords * 10)} className="h-2" />
                 </div>
               </CardContent>
             </Card>
 
             <Card>
               <CardHeader>
-                <CardTitle class="flex items-center gap-2">
-                  <Eye class="w-5 h-5 text-accent" />
+                <CardTitle className="flex items-center gap-2">
+                  <Eye className="w-5 h-5 text-accent" />
                   Non-Verbal Metrics
                 </CardTitle>
               </CardHeader>
-              <CardContent class="space-y-4">
-                <div class="space-y-2">
-                  <div class="flex justify-between">
-                    <span class="text-sm">Eye Contact</span>
-                    <span class="text-sm font-medium">{analysisData.metrics.eyeContact}%</span>
+              <CardContent className="space-y-4">
+                <div className="space-y-2">
+                  <div className="flex justify-between">
+                    <span className="text-sm">Eye Contact</span>
+                    <span className="text-sm font-medium">{analysisData.metrics.eyeContact}%</span>
                   </div>
-                  <Progress value={analysisData.metrics.eyeContact} class="h-2" />
+                  <Progress value={analysisData.metrics.eyeContact} className="h-2" />
                 </div>
 
-                <div class="space-y-2">
-                  <div class="flex justify-between">
-                    <span class="text-sm">Confidence</span>
-                    <span class="text-sm font-medium">{analysisData.metrics.confidence}%</span>
+                <div className="space-y-2">
+                  <div className="flex justify-between">
+                    <span className="text-sm">Confidence</span>
+                    <span className="text-sm font-medium">{analysisData.metrics.confidence}%</span>
                   </div>
-                  <Progress value={analysisData.metrics.confidence} class="h-2" />
+                  <Progress value={analysisData.metrics.confidence} className="h-2" />
                 </div>
 
-                <div class="space-y-2">
-                  <div class="flex justify-between">
-                    <span class="text-sm">Enthusiasm</span>
-                    <span class="text-sm font-medium">{analysisData.metrics.enthusiasm}%</span>
+                <div className="space-y-2">
+                  <div className="flex justify-between">
+                    <span className="text-sm">Enthusiasm</span>
+                    <span className="text-sm font-medium">{analysisData.metrics.enthusiasm}%</span>
                   </div>
-                  <Progress value={analysisData.metrics.enthusiasm} class="h-2" />
+                  <Progress value={analysisData.metrics.enthusiasm} className="h-2" />
                 </div>
               </CardContent>
             </Card>
           </div>
 
           {/* Strengths and Improvements */}
-          <div class="grid md:grid-cols-2 gap-6">
+          <div className="grid md:grid-cols-2 gap-6">
             <Card>
               <CardHeader>
-                <CardTitle class="flex items-center gap-2 text-green-600">
-                  <CheckCircle class="w-5 h-5" />
+                <CardTitle className="flex items-center gap-2 text-green-600">
+                  <CheckCircle className="w-5 h-5" />
                   Key Strengths
                 </CardTitle>
                 <CardDescription>Areas where you performed exceptionally well</CardDescription>
               </CardHeader>
               <CardContent>
-                <div class="space-y-3">
+                <div className="space-y-3">
                   {analysisData.strengths.map((strength, index) => (
-                    <div key={index} class="flex items-start gap-3 p-3 bg-green-50 dark:bg-green-950/20 rounded-lg">
-                      <CheckCircle class="w-4 h-4 text-green-600 mt-0.5" />
-                      <span class="text-sm">{strength}</span>
+                    <div key={index} className="flex items-start gap-3 p-3 bg-green-50 dark:bg-green-950/20 rounded-lg">
+                      <CheckCircle className="w-4 h-4 text-green-600 mt-0.5" />
+                      <span className="text-sm">{strength}</span>
                     </div>
                   ))}
                 </div>
@@ -315,18 +315,18 @@ const InterviewAnalysis = ({ analysisData, jobTitle, onRetake, onSaveReport }: I
 
             <Card>
               <CardHeader>
-                <CardTitle class="flex items-center gap-2 text-orange-600">
-                  <AlertTriangle class="w-5 h-5" />
+                <CardTitle className="flex items-center gap-2 text-orange-600">
+                  <AlertTriangle className="w-5 h-5" />
                   Areas for Improvement
                 </CardTitle>
                 <CardDescription>Focus on these areas for better performance</CardDescription>
               </CardHeader>
               <CardContent>
-                <div class="space-y-3">
+                <div className="space-y-3">
                   {analysisData.improvements.map((improvement, index) => (
-                    <div key={index} class="flex items-start gap-3 p-3 bg-orange-50 dark:bg-orange-950/20 rounded-lg">
-                      <AlertTriangle class="w-4 h-4 text-orange-600 mt-0.5" />
-                      <span class="text-sm">{improvement}</span>
+                    <div key={index} className="flex items-start gap-3 p-3 bg-orange-50 dark:bg-orange-950/20 rounded-lg">
+                      <AlertTriangle className="w-4 h-4 text-orange-600 mt-0.5" />
+                      <span className="text-sm">{improvement}</span>
                     </div>
                   ))}
                 </div>
@@ -335,41 +335,41 @@ const InterviewAnalysis = ({ analysisData, jobTitle, onRetake, onSaveReport }: I
           </div>
         </TabsContent>
 
-        <TabsContent value="questions" class="space-y-6">
-          <div class="grid lg:grid-cols-3 gap-6">
+        <TabsContent value="questions" className="space-y-6">
+          <div className="grid lg:grid-cols-3 gap-6">
             {/* Question List */}
             <Card>
               <CardHeader>
                 <CardTitle>Questions Overview</CardTitle>
                 <CardDescription>Click on any question to view detailed analysis</CardDescription>
               </CardHeader>
-              <CardContent class="p-0">
-                <ScrollArea class="h-96">
-                  <div class="space-y-2 p-4">
+              <CardContent className="p-0">
+                <ScrollArea className="h-96">
+                  <div className="space-y-2 p-4">
                     {analysisData.questionAnalysis.map((qa, index) => (
                       <div
                         key={index}
-                        class={`p-3 rounded-lg cursor-pointer transition-colors ${
+                        className={`p-3 rounded-lg cursor-pointer transition-colors ${
                           selectedQuestion === index
                             ? 'bg-primary/10 border border-primary/20'
                             : 'bg-muted/50 hover:bg-muted'
                         }`}
                         onClick={() => setSelectedQuestion(index)}
                       >
-                        <div class="flex items-center justify-between mb-2">
-                          <Badge class={
+                        <div className="flex items-center justify-between mb-2">
+                          <Badge className={
                             qa.type === 'behavioral' ? 'bg-blue-500' :
                             qa.type === 'technical' ? 'bg-green-500' : 'bg-purple-500'
                           }>
                             {qa.type}
                           </Badge>
-                          <div class={`text-sm font-semibold ${getScoreColor(qa.score)}`}>
+                          <div className={`text-sm font-semibold ${getScoreColor(qa.score)}`}>
                             {qa.score}%
                           </div>
                         </div>
-                        <p class="text-sm truncate">{qa.question}</p>
-                        <div class="flex items-center gap-2 mt-2 text-xs text-muted-foreground">
-                          <Clock class="w-3 h-3" />
+                        <p className="text-sm truncate">{qa.question}</p>
+                        <div className="flex items-center gap-2 mt-2 text-xs text-muted-foreground">
+                          <Clock className="w-3 h-3" />
                           {formatTime(qa.timeSpent)}
                         </div>
                       </div>
@@ -380,56 +380,56 @@ const InterviewAnalysis = ({ analysisData, jobTitle, onRetake, onSaveReport }: I
             </Card>
 
             {/* Question Details */}
-            <div class="lg:col-span-2 space-y-6">
+            <div className="lg:col-span-2 space-y-6">
               {analysisData.questionAnalysis[selectedQuestion] && (
                 <>
                   <Card>
                     <CardHeader>
-                      <div class="flex items-center justify-between">
+                      <div className="flex items-center justify-between">
                         <CardTitle>Question {selectedQuestion + 1}</CardTitle>
-                        <div class="flex items-center gap-2">
-                          <Badge class={
+                        <div className="flex items-center gap-2">
+                          <Badge className={
                             analysisData.questionAnalysis[selectedQuestion].type === 'behavioral' ? 'bg-blue-500' :
                             analysisData.questionAnalysis[selectedQuestion].type === 'technical' ? 'bg-green-500' : 'bg-purple-500'
                           }>
                             {analysisData.questionAnalysis[selectedQuestion].type}
                           </Badge>
-                          <div class={`text-lg font-bold ${getScoreColor(analysisData.questionAnalysis[selectedQuestion].score)}`}>
+                          <div className={`text-lg font-bold ${getScoreColor(analysisData.questionAnalysis[selectedQuestion].score)}`}>
                             {analysisData.questionAnalysis[selectedQuestion].score}%
                           </div>
                         </div>
                       </div>
                     </CardHeader>
-                    <CardContent class="space-y-4">
-                      <div class="p-4 bg-muted/50 rounded-lg">
-                        <h4 class="font-semibold mb-2">Question:</h4>
-                        <p class="text-sm">{analysisData.questionAnalysis[selectedQuestion].question}</p>
+                    <CardContent className="space-y-4">
+                      <div className="p-4 bg-muted/50 rounded-lg">
+                        <h4 className="font-semibold mb-2">Question:</h4>
+                        <p className="text-sm">{analysisData.questionAnalysis[selectedQuestion].question}</p>
                       </div>
 
-                      <div class="p-4 bg-primary/5 rounded-lg">
-                        <h4 class="font-semibold mb-2">Your Answer:</h4>
-                        <ScrollArea class="h-32">
-                          <p class="text-sm text-muted-foreground whitespace-pre-wrap">
+                      <div className="p-4 bg-primary/5 rounded-lg">
+                        <h4 className="font-semibold mb-2">Your Answer:</h4>
+                        <ScrollArea className="h-32">
+                          <p className="text-sm text-muted-foreground whitespace-pre-wrap">
                             {analysisData.questionAnalysis[selectedQuestion].answer}
                           </p>
                         </ScrollArea>
                       </div>
 
-                      <div class="p-4 bg-accent/5 rounded-lg">
-                        <h4 class="font-semibold mb-2">AI Feedback:</h4>
-                        <p class="text-sm">{analysisData.questionAnalysis[selectedQuestion].feedback}</p>
+                      <div className="p-4 bg-accent/5 rounded-lg">
+                        <h4 className="font-semibold mb-2">AI Feedback:</h4>
+                        <p className="text-sm">{analysisData.questionAnalysis[selectedQuestion].feedback}</p>
                       </div>
 
                       {analysisData.questionAnalysis[selectedQuestion].suggestions.length > 0 && (
                         <div>
-                          <h4 class="font-semibold mb-2 flex items-center gap-2">
-                            <Lightbulb class="w-4 h-4 text-primary" />
+                          <h4 className="font-semibold mb-2 flex items-center gap-2">
+                            <Lightbulb className="w-4 h-4 text-primary" />
                             Suggestions for Improvement:
                           </h4>
-                          <ul class="space-y-1">
+                          <ul className="space-y-1">
                             {analysisData.questionAnalysis[selectedQuestion].suggestions.map((suggestion, idx) => (
-                              <li key={idx} class="text-sm text-muted-foreground flex items-start gap-2">
-                                <span class="text-primary mt-1">•</span>
+                              <li key={idx} className="text-sm text-muted-foreground flex items-start gap-2">
+                                <span className="text-primary mt-1">•</span>
                                 <span>{suggestion}</span>
                               </li>
                             ))}
@@ -444,29 +444,29 @@ const InterviewAnalysis = ({ analysisData, jobTitle, onRetake, onSaveReport }: I
           </div>
         </TabsContent>
 
-        <TabsContent value="transcript" class="space-y-6">
+        <TabsContent value="transcript" className="space-y-6">
           <Card>
             <CardHeader>
-              <CardTitle class="flex items-center gap-2">
-                <FileText class="w-5 h-5" />
+              <CardTitle className="flex items-center gap-2">
+                <FileText className="w-5 h-5" />
                 Interview Transcript
               </CardTitle>
               <CardDescription>Complete conversation with sentiment analysis</CardDescription>
             </CardHeader>
             <CardContent>
-              <ScrollArea class="h-96">
-                <div class="space-y-4">
+              <ScrollArea className="h-96">
+                <div className="space-y-4">
                   {analysisData.transcript.map((entry, index) => (
-                    <div key={index} class={`p-4 rounded-lg ${
+                    <div key={index} className={`p-4 rounded-lg ${
                       entry.speaker === 'interviewer' 
                         ? 'bg-primary/5 border-l-4 border-primary' 
                         : 'bg-accent/5 border-l-4 border-accent'
                     }`}>
-                      <div class="flex items-center justify-between mb-2">
-                        <div class="flex items-center gap-2">
-                          <span class="font-semibold capitalize">{entry.speaker}</span>
+                      <div className="flex items-center justify-between mb-2">
+                        <div className="flex items-center gap-2">
+                          <span className="font-semibold capitalize">{entry.speaker}</span>
                           {entry.speaker === 'candidate' && entry.sentiment && (
-                            <Badge variant="outline" class={
+                            <Badge variant="outline" className={
                               entry.sentiment === 'positive' ? 'border-green-500 text-green-500' :
                               entry.sentiment === 'negative' ? 'border-red-500 text-red-500' :
                               'border-yellow-500 text-yellow-500'
@@ -475,16 +475,16 @@ const InterviewAnalysis = ({ analysisData, jobTitle, onRetake, onSaveReport }: I
                             </Badge>
                           )}
                         </div>
-                        <span class="text-xs text-muted-foreground">{entry.timestamp}</span>
+                        <span className="text-xs text-muted-foreground">{entry.timestamp}</span>
                       </div>
-                      <p class="text-sm">{entry.text}</p>
+                      <p className="text-sm">{entry.text}</p>
                       {entry.confidence && (
-                        <div class="mt-2">
-                          <div class="flex justify-between text-xs text-muted-foreground mb-1">
+                        <div className="mt-2">
+                          <div className="flex justify-between text-xs text-muted-foreground mb-1">
                             <span>Confidence</span>
                             <span>{entry.confidence}%</span>
                           </div>
-                          <Progress value={entry.confidence} class="h-1" />
+                          <Progress value={entry.confidence} className="h-1" />
                         </div>
                       )}
                     </div>
@@ -495,20 +495,20 @@ const InterviewAnalysis = ({ analysisData, jobTitle, onRetake, onSaveReport }: I
           </Card>
         </TabsContent>
 
-        <TabsContent value="feedback" class="space-y-6">
-          <div class="grid md:grid-cols-2 gap-6">
+        <TabsContent value="feedback" className="space-y-6">
+          <div className="grid md:grid-cols-2 gap-6">
             <Card>
               <CardHeader>
-                <CardTitle class="text-green-600">What You Did Well</CardTitle>
+                <CardTitle className="text-green-600">What You Did Well</CardTitle>
               </CardHeader>
               <CardContent>
-                <div class="space-y-4">
+                <div className="space-y-4">
                   {analysisData.strengths.map((strength, index) => (
-                    <div key={index} class="flex items-start gap-3">
-                      <CheckCircle class="w-5 h-5 text-green-600 mt-0.5" />
+                    <div key={index} className="flex items-start gap-3">
+                      <CheckCircle className="w-5 h-5 text-green-600 mt-0.5" />
                       <div>
-                        <p class="font-medium">{strength}</p>
-                        <p class="text-sm text-muted-foreground mt-1">
+                        <p className="font-medium">{strength}</p>
+                        <p className="text-sm text-muted-foreground mt-1">
                           This demonstrates strong {strength.toLowerCase()} skills that employers value.
                         </p>
                       </div>
@@ -520,16 +520,16 @@ const InterviewAnalysis = ({ analysisData, jobTitle, onRetake, onSaveReport }: I
 
             <Card>
               <CardHeader>
-                <CardTitle class="text-orange-600">Areas to Focus On</CardTitle>
+                <CardTitle className="text-orange-600">Areas to Focus On</CardTitle>
               </CardHeader>
               <CardContent>
-                <div class="space-y-4">
+                <div className="space-y-4">
                   {analysisData.improvements.map((improvement, index) => (
-                    <div key={index} class="flex items-start gap-3">
-                      <AlertTriangle class="w-5 h-5 text-orange-600 mt-0.5" />
+                    <div key={index} className="flex items-start gap-3">
+                      <AlertTriangle className="w-5 h-5 text-orange-600 mt-0.5" />
                       <div>
-                        <p class="font-medium">{improvement}</p>
-                        <p class="text-sm text-muted-foreground mt-1">
+                        <p className="font-medium">{improvement}</p>
+                        <p className="text-sm text-muted-foreground mt-1">
                           Consider practicing this area more to improve your overall performance.
                         </p>
                       </div>
@@ -541,17 +541,17 @@ const InterviewAnalysis = ({ analysisData, jobTitle, onRetake, onSaveReport }: I
           </div>
         </TabsContent>
 
-        <TabsContent value="recommendations" class="space-y-6">
-          <div class="space-y-4">
+        <TabsContent value="recommendations" className="space-y-6">
+          <div className="space-y-4">
             {analysisData.recommendations.map((rec, index) => (
-              <Card key={index} class={`border-l-4 ${
+              <Card key={index} className={`border-l-4 ${
                 rec.priority === 'high' ? 'border-red-500' :
                 rec.priority === 'medium' ? 'border-yellow-500' : 'border-green-500'
               }`}>
                 <CardHeader>
-                  <div class="flex items-center justify-between">
-                    <CardTitle class="text-lg">{rec.title}</CardTitle>
-                    <Badge variant="outline" class={
+                  <div className="flex items-center justify-between">
+                    <CardTitle className="text-lg">{rec.title}</CardTitle>
+                    <Badge variant="outline" className={
                       rec.priority === 'high' ? 'border-red-500 text-red-500' :
                       rec.priority === 'medium' ? 'border-yellow-500 text-yellow-500' :
                       'border-green-500 text-green-500'
@@ -562,7 +562,7 @@ const InterviewAnalysis = ({ analysisData, jobTitle, onRetake, onSaveReport }: I
                   <CardDescription>{rec.category}</CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <p class="text-sm">{rec.description}</p>
+                  <p className="text-sm">{rec.description}</p>
                 </CardContent>
               </Card>
             ))}

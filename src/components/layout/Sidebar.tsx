@@ -60,7 +60,7 @@ const Sidebar = () => {
   };
 
   return (
-    <div className={`bg-card border-r transition-all duration-300 ${collapsed ? 'w-16' : 'w-80'} flex flex-col h-screen`}>
+    <div className={`bg-card border-r transition-all duration-300 ${collapsed ? 'w-16' : 'w-80'} flex flex-col h-screen flex-shrink-0`}>
       {/* Header */}
       <div className="p-4 border-b">
         <div className="flex items-center gap-3">

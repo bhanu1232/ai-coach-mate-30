@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { useToast } from '@/hooks/use-toast';
 import { Navigate, useNavigate } from 'react-router-dom';
-import { ArrowLeft, Brain, Sparkles, Target, TrendingUp, Loader2 } from 'lucide-react';
+import { ArrowLeft, Brain, Sparkles, Users, Zap, Loader2, CheckCircle } from 'lucide-react';
 
 const Login = () => {
   const { user, signInWithGoogle } = useAuth();
@@ -37,81 +37,32 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-background/95 to-primary/5 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-background flex">
       {/* Back to Home Button */}
       <Button
         variant="ghost"
         onClick={() => navigate('/')}
-        className="absolute top-6 left-6 gap-2 text-muted-foreground hover:text-foreground"
+        className="absolute top-6 left-6 gap-2 text-muted-foreground hover:text-foreground z-10"
       >
         <ArrowLeft className="h-4 w-4" />
         Back to Home
       </Button>
 
-      <div className="w-full max-w-6xl grid lg:grid-cols-2 gap-12 items-center">
-        {/* Left side - Hero content */}
-        <div className="space-y-8">
-          <div className="space-y-6">
-            <div className="inline-flex items-center gap-2 bg-gradient-primary text-primary-foreground px-4 py-2 rounded-full text-sm font-medium">
-              <Brain className="w-4 h-4" />
-              AI-Powered Interview Preparation
-            </div>
-            
-            <h1 className="text-4xl lg:text-6xl font-bold leading-tight">
-              Master Your Next
-              <span className="block gradient-text">Interview</span>
-            </h1>
-            
-            <p className="text-xl text-muted-foreground leading-relaxed">
-              Get personalized interview questions, practice with AI feedback, and track your progress. 
-              Turn your dream job into reality with intelligent preparation.
-            </p>
-          </div>
-
-          {/* Feature highlights */}
-          <div className="grid gap-6">
-            {[
-              {
-                icon: <Sparkles className="h-6 w-6 text-primary" />,
-                title: "AI-Powered Questions",
-                description: "Get personalized interview questions tailored to your specific job description and industry requirements."
-              },
-              {
-                icon: <Target className="h-6 w-6 text-accent" />,
-                title: "Real-time Feedback",
-                description: "Receive instant, detailed feedback on your answers with suggestions for improvement."
-              },
-              {
-                icon: <TrendingUp className="h-6 w-6 text-success" />,
-                title: "Progress Tracking",
-                description: "Monitor your improvement with comprehensive analytics and performance metrics."
-              }
-            ].map((feature, index) => (
-              <div key={index} className="flex items-start gap-4 p-4 rounded-xl bg-card/50 border border-card-border">
-                <div className="p-2 rounded-lg bg-background/80">
-                  {feature.icon}
+      <div className="w-full grid lg:grid-cols-2">
+        {/* Left side - Welcome Form */}
+        <div className="flex items-center justify-center p-8 lg:p-12">
+          <Card className="w-full max-w-md bg-card/95 backdrop-blur-sm border-2 shadow-2xl">
+            <CardHeader className="space-y-6 pb-8">
+              <div className="text-center space-y-4">
+                <div className="w-16 h-16 bg-gradient-primary rounded-2xl flex items-center justify-center mx-auto">
+                  <Brain className="w-8 h-8 text-primary-foreground" />
                 </div>
                 <div>
-                  <h3 className="font-semibold text-foreground mb-1">{feature.title}</h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed">{feature.description}</p>
+                  <CardTitle className="text-2xl font-bold">Welcome!</CardTitle>
+                  <CardDescription className="text-base mt-2">
+                    Sign in to start your AI-powered interview preparation
+                  </CardDescription>
                 </div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Right side - Sign in card */}
-        <div className="flex justify-center lg:justify-end">
-          <Card className="w-full max-w-md border-2 shadow-2xl bg-card/95 backdrop-blur-sm">
-            <CardHeader className="text-center space-y-4 pb-8">
-              <div className="w-16 h-16 bg-gradient-primary rounded-2xl flex items-center justify-center mx-auto">
-                <Brain className="w-8 h-8 text-primary-foreground" />
-              </div>
-              <div>
-                <CardTitle className="text-2xl font-bold">Welcome Back</CardTitle>
-                <CardDescription className="text-base mt-2">
-                  Sign in to continue your interview preparation journey
-                </CardDescription>
               </div>
             </CardHeader>
             
@@ -152,16 +103,16 @@ const Login = () => {
                 
                 <div className="grid gap-3 text-sm">
                   <div className="flex items-center gap-2 text-muted-foreground">
-                    <div className="w-2 h-2 bg-primary rounded-full"></div>
-                    <span>Personalized AI coaching</span>
+                    <CheckCircle className="w-4 h-4 text-primary" />
+                    <span>AI-powered personalized coaching</span>
                   </div>
                   <div className="flex items-center gap-2 text-muted-foreground">
-                    <div className="w-2 h-2 bg-accent rounded-full"></div>
+                    <CheckCircle className="w-4 h-4 text-accent" />
                     <span>Industry-specific questions</span>
                   </div>
                   <div className="flex items-center gap-2 text-muted-foreground">
-                    <div className="w-2 h-2 bg-success rounded-full"></div>
-                    <span>Detailed performance analytics</span>
+                    <CheckCircle className="w-4 h-4 text-success" />
+                    <span>Real-time feedback & analytics</span>
                   </div>
                 </div>
               </div>
@@ -176,6 +127,86 @@ const Login = () => {
               </div>
             </CardContent>
           </Card>
+        </div>
+
+        {/* Right side - Stats & Visualization */}
+        <div className="hidden lg:flex items-center justify-center p-8 lg:p-12 bg-gradient-to-br from-primary/10 via-background to-accent/10 relative overflow-hidden">
+          {/* Background pattern */}
+          <div className="absolute inset-0 opacity-10">
+            <div className="absolute top-1/4 left-1/4 w-32 h-32 border border-primary/20 rounded-full"></div>
+            <div className="absolute top-1/3 right-1/3 w-24 h-24 border border-accent/20 rounded-full"></div>
+            <div className="absolute bottom-1/4 left-1/3 w-16 h-16 border border-success/20 rounded-full"></div>
+          </div>
+
+          <div className="relative z-10 max-w-lg space-y-12">
+            {/* Stats Section */}
+            <div className="space-y-8">
+              <div className="text-center space-y-4">
+                <h2 className="text-4xl font-bold bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">
+                  400K+ users, 50M+ AI
+                </h2>
+                <p className="text-xl text-muted-foreground font-medium">
+                  generated matches
+                </p>
+                <div className="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-2 rounded-full text-sm font-medium border border-primary/20">
+                  <Sparkles className="w-4 h-4" />
+                  Trusted by professionals worldwide
+                </div>
+              </div>
+
+              {/* 3D Cube Visualization */}
+              <div className="flex justify-center">
+                <div className="relative w-40 h-40">
+                  {/* Cube faces */}
+                  <div className="absolute inset-0 transform rotate-12">
+                    <div className="w-full h-full bg-gradient-to-br from-primary/40 to-primary/20 rounded-lg border border-primary/30 backdrop-blur-sm"></div>
+                  </div>
+                  <div className="absolute inset-0 transform -rotate-12 translate-x-4 translate-y-4">
+                    <div className="w-full h-full bg-gradient-to-br from-accent/40 to-accent/20 rounded-lg border border-accent/30 backdrop-blur-sm"></div>
+                  </div>
+                  <div className="absolute inset-0 transform rotate-45 translate-x-2 translate-y-2">
+                    <div className="w-full h-full bg-gradient-to-br from-success/40 to-success/20 rounded-lg border border-success/30 backdrop-blur-sm"></div>
+                  </div>
+                  
+                  {/* Center highlight */}
+                  <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-8 h-8 bg-gradient-primary rounded-full shadow-glow"></div>
+                </div>
+              </div>
+
+              {/* Feature highlights */}
+              <div className="grid gap-6">
+                <div className="flex items-center gap-4 p-4 bg-card/30 backdrop-blur-sm rounded-xl border border-card-border/50">
+                  <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center">
+                    <Brain className="w-6 h-6 text-primary" />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-foreground">Smart AI Analysis</h3>
+                    <p className="text-sm text-muted-foreground">Advanced algorithms analyze your performance</p>
+                  </div>
+                </div>
+                
+                <div className="flex items-center gap-4 p-4 bg-card/30 backdrop-blur-sm rounded-xl border border-card-border/50">
+                  <div className="w-12 h-12 bg-accent/10 rounded-full flex items-center justify-center">
+                    <Users className="w-6 h-6 text-accent" />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-foreground">Global Community</h3>
+                    <p className="text-sm text-muted-foreground">Join thousands of successful candidates</p>
+                  </div>
+                </div>
+                
+                <div className="flex items-center gap-4 p-4 bg-card/30 backdrop-blur-sm rounded-xl border border-card-border/50">
+                  <div className="w-12 h-12 bg-success/10 rounded-full flex items-center justify-center">
+                    <Zap className="w-6 h-6 text-success" />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-foreground">Instant Results</h3>
+                    <p className="text-sm text-muted-foreground">Get detailed feedback in real-time</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
