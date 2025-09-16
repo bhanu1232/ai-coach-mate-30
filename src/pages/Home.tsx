@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
 import { useJobSessions } from '@/hooks/useJobSessions';
+import { Navigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -11,15 +12,29 @@ import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, D
 import MainLayout from '@/components/layout/MainLayout';
 import JobCard from '@/components/JobCard';
 import ProgressTracker from '@/components/ProgressTracker';
-import Hero from '@/components/Hero';
 import { Plus, Sparkles, Target, TrendingUp, Brain, Mic, Code, Award } from 'lucide-react';
 
 const Home = () => {
-  const { user } = useAuth();
+  const { user, loading } = useAuth();
   const { jobs, createJob, getUserProgress } = useJobSessions();
   const [isCreateDialogOpen, setIsCreateDialogOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <div className="text-center space-y-4">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto"></div>
+          <p className="text-muted-foreground">Loading...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (!user) {
+    return <Navigate to="/login" replace />;
+  }
 
   const userProgress = getUserProgress();
 
@@ -76,11 +91,6 @@ const Home = () => {
       setIsLoading(false);
     }
   };
-
-  // Show Hero component for new users, dashboard for existing users
-  if (jobs.length === 0 && userProgress.totalSessions === 0) {
-    return <Hero />;
-  }
 
   return (
     <MainLayout>

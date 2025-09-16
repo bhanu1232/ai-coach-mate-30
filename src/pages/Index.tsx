@@ -1,9 +1,10 @@
 import { useAuth } from '@/contexts/AuthContext';
-import { Navigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Hero from '@/components/Hero';
 
 const Index = () => {
   const { user, loading } = useAuth();
+  const navigate = useNavigate();
 
   if (loading) {
     return (
@@ -16,15 +17,19 @@ const Index = () => {
     );
   }
 
-  if (user) {
-    return <Navigate to="/dashboard" replace />;
-  }
+  const handleStartPracticing = () => {
+    navigate('/login');
+  };
+
+  const handleUploadJobDescription = () => {
+    navigate('/login');
+  };
 
   return (
     <div className="min-h-screen bg-background">
       <Hero 
-        onStartPracticing={() => window.location.href = '/login'}
-        onUploadJobDescription={() => window.location.href = '/login'}
+        onStartPracticing={handleStartPracticing}
+        onUploadJobDescription={handleUploadJobDescription}
       />
     </div>
   );

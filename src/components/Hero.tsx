@@ -1,6 +1,5 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Brain, Mic, BarChart3, Upload } from "lucide-react";
-import heroImage from "@/assets/hero-interview.jpg";
 
 interface HeroProps {
   onStartPracticing?: () => void;
@@ -11,10 +10,7 @@ const Hero = ({ onStartPracticing, onUploadJobDescription }: HeroProps) => {
   return (
     <div className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Background Image with Overlay */}
-      <div 
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-20"
-        style={{ backgroundImage: `url(${heroImage})` }}
-      />
+      <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-accent/10 opacity-50" />
       <div className="absolute inset-0 bg-gradient-to-br from-background via-background/90 to-background/80" />
       
       {/* Floating Elements */}
